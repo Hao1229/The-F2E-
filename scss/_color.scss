@@ -1,0 +1,20 @@
+$mainColor: #FFEDF7;
+$assistColor: #003164;
+$thirdColor: #FF4384;
+
+.bg-main{
+    background-color: $mainColor;
+};
+
+.bg-assist{
+    background-color: $assistColor;
+};
+
+.text-third{
+    color: $thirdColor;
+}
+
+
+.text-assist{
+    color: $assistColor;
+}

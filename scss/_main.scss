@@ -1,0 +1,30 @@
+::placeholder{
+    font-weight: bold;
+    color: $thirdColor;
+    font-style: italic;
+};
+
+
+.pointer:hover{
+    cursor: pointer;
+}
+
+.todoing-circle{
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid $assistColor !important;
+    &:hover{
+        box-shadow: 1px 3px 3px $assistColor;
+    }
+}
+
+.circle-timer{
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 1px solid $thirdColor !important;
+}
+
+.timer{
+    font-weight: bolder;
+    font-size: 9rem;
+}
