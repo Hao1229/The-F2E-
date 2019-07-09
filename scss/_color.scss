@@ -1,7 +1,9 @@
+//新增顏色變數
 $mainColor: #FFEDF7;
 $assistColor: #003164;
 $thirdColor: #FF4384;
 
+//背景顏色新增
 .bg-main{
     background-color: $mainColor;
 };
@@ -10,6 +12,11 @@ $thirdColor: #FF4384;
     background-color: $assistColor;
 };
 
+.bg-third{
+    background-color: $thirdColor;
+}
+
+//文字顏色新增
 .text-third{
     color: $thirdColor;
 }

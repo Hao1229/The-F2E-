@@ -6,12 +6,12 @@ html body {
   margin-left: 5rem;
 }
 
-.pr-6 {
-  padding-right: 5rem;
-}
-
 .mt-6 {
   margin-top: 9rem;
+}
+
+.pr-6 {
+  padding-right: 5rem;
 }
 
 .bg-main {
@@ -20,6 +20,10 @@ html body {
 
 .bg-assist {
   background-color: #003164;
+}
+
+.bg-third {
+  background-color: #FF4384;
 }
 
 .text-third {
@@ -78,5 +82,16 @@ html body {
 .timer {
   font-weight: bolder;
   font-size: 9rem;
+}
+
+.willtodo-circle {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #003164 !important;
+}
+
+.willtodo-circle:hover {
+  -webkit-box-shadow: 1px 2px 2px #003164;
+          box-shadow: 1px 2px 2px #003164;
 }
 /*# sourceMappingURL=all.css.map */

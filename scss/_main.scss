@@ -1,14 +1,16 @@
+//input placeholder顏色與文字設計
 ::placeholder{
     font-weight: bold;
     color: $thirdColor;
     font-style: italic;
 };
 
-
+//hover 出現可點擊游標
 .pointer:hover{
     cursor: pointer;
 }
 
+//正在進行的工作可勾選圓圈
 .todoing-circle{
     width: 3rem;
     height: 3rem;
@@ -18,13 +20,25 @@
     }
 }
 
+//正在進行工作動畫表示經過時間的圓圈
 .circle-timer{
     width: 0.75rem;
     height: 0.75rem;
     border: 1px solid $thirdColor !important;
 }
 
+//正在進行工作的計時器
 .timer{
     font-weight: bolder;
     font-size: 9rem;
+}
+
+//待辦清單內的可勾選小圓圈
+.willtodo-circle{
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid $assistColor !important;
+    &:hover{
+        box-shadow: 1px 2px 2px $assistColor;
+    }
 }
