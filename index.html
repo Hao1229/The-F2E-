@@ -13,9 +13,9 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid relative">
         <div class="row">
-            <section class="col-md-8 bg-main " >
+            <section class="col-md-8 bg-main ">
                 <div class="ml-5 mt-5 w-75">
                     <!-- 添加待辦input製作 -->
                     <div class="input-group">
@@ -60,7 +60,21 @@
                     </div>
                 </div>
             </section>
-            <section class="col-md-4 bg-assist" style="height:800px"></section>
+            <section class="col-md-4 bg-assist">
+                <!-- 切換按鈕 & 英文字 -->
+                <div class="d-flex flex-column align-items-end">
+                    <div class="d-flex flex-column">
+                        <i class="fas fa-list-ul text-white fa-lg mt-5 mr-5 pointer"></i>
+                        <i class="fas fa-chart-bar text-white fa-lg mt-5 mr-5 pointer"></i>
+                        <i class="fas fa-music text-white fa-lg mt-5 mr-5 pointer"></i>
+                    </div>
+                    <h3 class="text-white font-weight-bold mt-11 rotate pb-5">POMODORO</h3>
+                </div>
+            </section>
+            <!--中心圓圈製作 -->
+            <span class="rounded-circle main-circle-border" style="position:absolute;top: 130px; right: 180px;">
+
+            </span>
         </div>
 
     </div>

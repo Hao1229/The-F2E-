@@ -6,12 +6,48 @@ html body {
   margin-left: 5rem;
 }
 
+.ml-7 {
+  margin-left: 10rem;
+}
+
+.ml-8 {
+  margin-left: 15rem;
+}
+
+.ml-9 {
+  margin-left: 20rem;
+}
+
 .mt-6 {
   margin-top: 9rem;
 }
 
+.mt-7 {
+  margin-top: 10rem;
+}
+
+.mt-8 {
+  margin-top: 15rem;
+}
+
+.mt-9 {
+  margin-top: 20rem;
+}
+
+.mt-10 {
+  margin-top: 25rem;
+}
+
+.mt-11 {
+  margin-top: 28rem;
+}
+
 .pr-6 {
   padding-right: 5rem;
+}
+
+.relative {
+  position: relative;
 }
 
 .bg-main {
@@ -81,7 +117,7 @@ html body {
 
 .timer {
   font-weight: bolder;
-  font-size: 9rem;
+  font-size: 10rem;
 }
 
 .willtodo-circle {
@@ -93,5 +129,16 @@ html body {
 .willtodo-circle:hover {
   -webkit-box-shadow: 1px 2px 2px #003164;
           box-shadow: 1px 2px 2px #003164;
+}
+
+.rotate {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.main-circle-border {
+  width: 35rem;
+  height: 35rem;
+  border: 4px solid #FF4384 !important;
 }
 /*# sourceMappingURL=all.css.map */
