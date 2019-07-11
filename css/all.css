@@ -19,7 +19,7 @@ html body {
 }
 
 .mt-6 {
-  margin-top: 9rem;
+  margin-top: 5rem;
 }
 
 .mt-7 {
@@ -44,6 +44,14 @@ html body {
 
 .pr-6 {
   padding-right: 5rem;
+}
+
+.p-6 {
+  padding: 5rem;
+}
+
+.p-7 {
+  padding: 10rem;
 }
 
 .relative {
@@ -140,5 +148,10 @@ html body {
   width: 35rem;
   height: 35rem;
   border: 4px solid #FF4384 !important;
+}
+
+.cancel {
+  width: 0.8rem;
+  height: 0.8rem;
 }
 /*# sourceMappingURL=all.css.map */
