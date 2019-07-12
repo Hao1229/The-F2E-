@@ -127,6 +127,15 @@ var app = new Vue({
             let oriIndex = vm.toDos.indexOf(item);
             vm.toDos.splice(0,1,...vm.toDos.splice(oriIndex,1,vm.toDos[0]));
             this.resetTime();
+        },
+        deleteFinish:function(){
+            let vm = this;
+            for(let i = 0; i < vm.toDos.length; i++){
+                if(vm.toDos[i].finish == true){
+                    vm.toDos.splice(i,1);
+                    i-=1;
+                }
+            }
         }
     },
     computed:{
@@ -163,6 +172,7 @@ var app = new Vue({
 
 //jQuery
 
+//製作右列按鈕hover動畫
 $(document).ready(function () {
     $('.fa-trash-alt,.fa-music,.fa-chart-bar,.fa-list-ul').hover(function () {
             // over
