@@ -15,18 +15,16 @@ var app = new Vue({
             let vm = this;
             vm.start = !vm.start;
             //為了讓時間正確顯示，執行判斷式前先優先執行一次 時間轉換
-            let minutes = Math.floor(vm.startTime / 60);
+            let minute = Math.floor(vm.startTime / 60);
             let seconds = vm.startTime % 60;
-            if (minutes < 10) {
-                vm.minutes = '0' + minutes;
+            if (minute < 10) {
+                vm.minutes = '0' + minute;
             }else {
-                vm.minutes = minutes;
-                vm.seconds = seconds;
+                vm.minutes = minute;
             };
             if (seconds < 10) {
                 vm.seconds = '0' + seconds;
             } else {
-                vm.minutes = minutes;
                 vm.seconds = seconds;
             };  
             //透過vm.start布林值決定是否執行setInterval
@@ -42,18 +40,16 @@ var app = new Vue({
             let vm = this;
             vm.settimeData = '';
             vm.startTime -= 1
-            let minutes = Math.floor(vm.startTime / 60);
+            let minute = Math.floor(vm.startTime / 60);
             let seconds = vm.startTime % 60;
-            if (minutes < 10) {
-                vm.minutes = '0' + minutes;
+            if (minute < 10) {
+                vm.minutes = '0' + minute;
             } else {
-                vm.minutes = minutes;
-                vm.seconds = seconds;
+                vm.minutes = minute;
             };
             if (seconds < 10) {
                 vm.seconds = '0' + seconds;
             } else {
-                vm.minutes = minutes;
                 vm.seconds = seconds;
             };
             if (vm.startTime == 0) {
@@ -67,18 +63,16 @@ var app = new Vue({
             let vm = this;
             vm.start = false;
             vm.startTime = vm.setTime;
-            let minutes = Math.floor(vm.startTime / 60);
+            let minute = Math.floor(vm.startTime / 60);
             let seconds = vm.startTime % 60;
-            if (minutes < 10) {
-                vm.minutes = '0' + minutes;
+            if (minute < 10) {
+                vm.minutes = '0' + minute;
             } else {
-                vm.minutes = minutes;
-                vm.seconds = seconds;
+                vm.minutes = minute;
             };
             if (seconds < 10) {
                 vm.seconds = '0' + seconds;
             } else {
-                vm.minutes = minutes;
                 vm.seconds = seconds;
             };
             window.clearInterval(vm.counterId);
@@ -98,18 +92,16 @@ var app = new Vue({
             vm.start = false;
             vm.setTime = vm.settimeData * 60;
             vm.startTime = vm.setTime;
-            let minutes = Math.floor(vm.startTime / 60);
+            let minute = Math.floor(vm.startTime / 60);
             let seconds = vm.startTime % 60;
-            if (minutes < 10) {
-                vm.minutes = '0' + minutes;
+            if (minute < 10) {
+                vm.minutes = '0' + minute;
             } else {
-                vm.minutes = minutes;
-                vm.seconds = seconds;
+                vm.minutes = minute;
             };
             if (seconds < 10) {
                 vm.seconds = '0' + seconds;
             } else {
-                vm.minutes = minutes;
                 vm.seconds = seconds;
             };
             window.clearInterval(vm.counterId);
