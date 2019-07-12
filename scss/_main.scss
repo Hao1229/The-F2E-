@@ -61,6 +61,11 @@
     border: 3px solid $thirdColor !important;
 }
 
+//第二大圓圈邊框-啟動
+.second-circle-border-active{
+    border: 1rem solid $thirdColor !important;
+}
+
 //取消小方塊
 .cancel{
     width: 0.8rem;

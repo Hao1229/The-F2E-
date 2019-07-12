@@ -9,6 +9,8 @@ var app = new Vue({
         counterId: {}, //用來儲存 setInterval 產生的 id
         setTime: 1500,
         settimeData: '', //用來儲存設定的時間，與input做雙向綁定
+        newTodo:'',
+        toDos:[],
     },
     methods: {
         controlTimer: function () {
@@ -106,8 +108,53 @@ var app = new Vue({
             };
             window.clearInterval(vm.counterId);
             vm.counterId = {};
+        },
+        addTodo: function(){
+            let vm = this;
+            let value = vm.newTodo.trim(); //為了不動到原value 回傳一個新value
+           if(!value){
+               alert('請填入內容');
+               return
+           };
+           vm.toDos.push({
+               title: value,
+               finish: false,
+           });
+           vm.newTodo = ''; 
+        },
+        todoChange: function(item,index){
+            let vm = this;
+            let oriIndex = vm.toDos.indexOf(item);
+            vm.toDos.splice(0,1,...vm.toDos.splice(oriIndex,1,vm.toDos[0]));
+            
         }
     },
+    computed:{
+        firstThing:function(){
+            let vm = this;
+            return vm.toDos.filter(function(item,index){
+                return index === 0;
+            })
+        },
+        secondThing:function(){
+            let vm = this;
+            return vm.toDos.filter(function(item,index){
+                return index === 1;
+            })
+        },
+        thirdThing:function(){
+            let vm = this;
+            return vm.toDos.filter(function(item,index){
+                return index === 2;
+            })
+        },
+        fourthThing:function(){
+            let vm = this;
+            return vm.toDos.filter(function(item,index){
+                return index === 3;
+            })
+        },
+    }
 
 
 

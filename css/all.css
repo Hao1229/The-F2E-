@@ -54,6 +54,18 @@ html body {
   padding: 10rem;
 }
 
+.pb-6 {
+  padding-bottom: 5rem;
+}
+
+.pb-7 {
+  padding-bottom: 10rem;
+}
+
+.pb-8 {
+  padding-bottom: 15rem;
+}
+
 .relative {
   position: relative;
 }
@@ -152,6 +164,10 @@ html body {
 
 .second-circle-border {
   border: 3px solid #FF4384 !important;
+}
+
+.second-circle-border-active {
+  border: 1rem solid #FF4384 !important;
 }
 
 .cancel {
