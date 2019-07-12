@@ -10,7 +10,7 @@ var app = new Vue({
         setTime: 1500,
         settimeData: '', //用來儲存設定的時間，與input做雙向綁定
         newTodo:'',
-        toDos:[],
+        toDos:JSON.parse(localStorage.getItem('list')) || [],
     },
     methods: {
         controlTimer: function () {
@@ -163,6 +163,14 @@ var app = new Vue({
                 return index === 3;
             })
         },
+    },
+    watch:{
+        toDos:{
+            handler(){
+                localStorage.setItem('list',JSON.stringify(this.toDos));
+            },
+            deep:true
+        }
     }
 
 
