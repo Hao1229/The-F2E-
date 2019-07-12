@@ -85,3 +85,12 @@
 .plus:hover{
     color: blue;
 }
+
+//為more按鈕新增hover回饋
+.more-hover{
+    transition: all 1s;
+    &:hover{
+        color: blue !important;
+    }
+    
+}

@@ -177,4 +177,13 @@ html body {
 .plus:hover {
   color: blue;
 }
+
+.more-hover {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.more-hover:hover {
+  color: blue !important;
+}
 /*# sourceMappingURL=all.css.map */
