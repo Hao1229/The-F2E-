@@ -40,6 +40,7 @@ var app = new Vue({
         },
         timeDecorate: function () {
             let vm = this;
+            vm.settimeData = '';
             vm.startTime -= 1
             let minutes = Math.floor(vm.startTime / 60);
             let seconds = vm.startTime % 60;
@@ -85,17 +86,17 @@ var app = new Vue({
         },
         settingTime:function(){
             let vm = this;
-            vm.start = false;
-            vm.setTime = vm.settimeData * 60;
-            if(vm.setTime > 5940){
+            if(vm.settimeData > 99){
                 alert('不能超過兩位數');
-                vm.setTime = 1500;
+                vm.settimeData = '';
                 return;
-            }else if(vm.setTime < 0){
+            }else if(vm.settimeData < 0){
                 alert('不能是負數');
-                vm.setTime = 1500;
+                vm.settimeData = '';
                 return;
             }
+            vm.start = false;
+            vm.setTime = vm.settimeData * 60;
             vm.startTime = vm.setTime;
             let minutes = Math.floor(vm.startTime / 60);
             let seconds = vm.startTime % 60;
@@ -113,7 +114,6 @@ var app = new Vue({
             };
             window.clearInterval(vm.counterId);
             vm.counterId = {};
-            vm.settimeData = '';
         }
     },
 
