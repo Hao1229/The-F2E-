@@ -126,7 +126,7 @@ var app = new Vue({
             let vm = this;
             let oriIndex = vm.toDos.indexOf(item);
             vm.toDos.splice(0,1,...vm.toDos.splice(oriIndex,1,vm.toDos[0]));
-            
+            this.resetTime();
         }
     },
     computed:{
@@ -159,3 +159,15 @@ var app = new Vue({
 
 
 });
+
+
+//jQuery
+
+$(document).ready(function () {
+    $('.fa-trash-alt,.fa-music,.fa-chart-bar,.fa-list-ul').hover(function () {
+            // over
+            $(this).toggleClass('animated swing');
+        }
+    );
+});
+

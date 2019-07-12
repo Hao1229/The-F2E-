@@ -9,20 +9,22 @@
     <link rel="shortcut icon" href="https://i.imgur.com/1qjvzA6.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="css/all.css">
 </head>
 
 <body>
     <div class="container-fluid relative">
         <div class="row" id="app">
-            <section class="col-md-8 bg-main pb-5">
+            <section class="col-md-8 bg-main pb-6">
                 <div class="ml-5 mt-5 w-75">
                     <!-- 添加待辦input製作 -->
                     <div class="input-group">
-                        <input type="text" placeholder="add a new mission…" class="p-3 w-75 border-0" v-model='newTodo' @keyup.enter='addTodo'>
+                        <input type="text" placeholder="add a new mission…" class="p-3 w-75 border-0" v-model='newTodo'
+                            @keyup.enter='addTodo'>
                         <div class="input-group-prepend ">
-                            <span class="text-center input-group-text text-third bg-white border-0 pointer plus" @click="addTodo" ><i
-                                    class="fas fa-plus fa-lg"></i></span>
+                            <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
+                                @click="addTodo"><i class="fas fa-plus fa-lg"></i></span>
                         </div>
                         <!-- 設定時間(分鐘)input製作 -->
                         <input type="number" placeholder="stop your time & set your work time (only minutes)"
@@ -35,64 +37,113 @@
                     <!-- 進行中工作區域 -->
                     <div>
                         <div class="mt-6 d-flex flex-row">
-                            <span class="rounded-circle todoing-circle mr-3 pointer"></span>
+
+                            <span class="rounded-circle todoing-circle mr-3 pointer"
+                                :class="{'fas fa-check-circle text-assist fa-3x border-0':item.finish}"
+                                v-for="(item,index) in firstThing" @click="item.finish = !item.finish"></span>
+
                             <div class="d-flex flex-column">
-                                <h5 class="text-assist font-weight-bold" v-for="(item,index) in firstThing">{{item.title}}</h5>
+
+                                <h5 class="text-assist font-weight-bold" v-for="(item,index) in firstThing"
+                                    :class="{'completed': item.finish}">
+                                    {{item.title}}</h5>
+
                                 <span class="rounded-circle circle-timer"></span>
+
                             </div>
+
                         </div>
                         <span class="timer text-third" id="js-timer-time">{{minutes}}:{{seconds}}</span>
                     </div>
                     <!-- Todolist待辦事項 -->
                     <ul class="list-group list-group-flush w-75 mt-5"
                         style="border-bottom: rgba(0,0,0,.125) 1px solid !important">
-                        <li class="list-group-item bg-main text-assist font-weight-bold border-top-0 d-flex px-0" v-for='(item,index) in secondThing'>
-                            <span class="rounded-circle willtodo-circle mr-2 pointer"></span><span>{{item.title}}</span>
-                            <span class="text-center ml-auto pointer" @click="todoChange(item)" v-for='item in secondThing'>
+
+                        <li class="list-group-item bg-main text-assist font-weight-bold border-top-0 d-flex px-0"
+                            v-for='(item,index) in secondThing'>
+
+                            <span class="rounded-circle willtodo-circle mr-3 pointer"
+                                @click="item.finish = !item.finish"
+                                :class="{'fas fa-check-circle text-assist fa-2x border-0':item.finish}"></span>
+
+                            <span :class="{'completed': item.finish}">{{item.title}}</span>
+
+                            <span class="text-center ml-auto pointer" @click="todoChange(item)"
+                                v-for='item in secondThing'>
                                 <i class="far fa-play-circle"></i></span>
+
                         </li>
-                        <li class="list-group-item bg-main text-assist font-weight-bold d-flex px-0" v-for='(item,index) in thirdThing' ><span
-                                class="rounded-circle willtodo-circle mr-2 pointer"></span><span>{{item.title}}</span>
-                            <span class="text-center ml-auto pointer" @click="todoChange(item)" v-for='item in thirdThing'>
+
+                        <li class="list-group-item bg-main text-assist font-weight-bold d-flex px-0"
+                            v-for='(item,index) in thirdThing'>
+
+                            <span class="rounded-circle willtodo-circle mr-3 pointer"
+                                @click="item.finish = !item.finish"
+                                :class="{'fas fa-check-circle text-assist fa-2x border-0':item.finish}"></span>
+
+                            <span :class="{'completed': item.finish}">{{item.title}}</span>
+
+                            <span class="text-center ml-auto pointer" @click="todoChange(item)"
+                                v-for='item in thirdThing'>
                                 <i class="far fa-play-circle"></i></span>
+
                         </li>
-                        <li class="list-group-item bg-main text-assist font-weight-bold d-flex px-0" v-for='(item,index) in fourthThing'><span
-                                class="rounded-circle willtodo-circle mr-2 pointer"></span><span>{{item.title}}</span>
-                            <span class="text-center ml-auto pointer">
+
+                        <li class="list-group-item bg-main text-assist font-weight-bold d-flex px-0"
+                            v-for='(item,index) in fourthThing'>
+
+                            <span class="rounded-circle willtodo-circle mr-3 pointer"
+                                @click="item.finish = !item.finish"
+                                :class="{'fas fa-check-circle text-assist fa-2x border-0':item.finish}"></span>
+
+                            <span :class="{'completed': item.finish}">{{item.title}}</span>
+
+                            <span class="text-center ml-auto pointer" @click="todoChange(item)"
+                                v-for='item in fourthThing'>
                                 <i class="far fa-play-circle"></i></span>
+
                         </li>
+
                     </ul>
+
                     <div class="d-flex flex-row-reverse w-75 pointer" v-if="toDos.length > 4">
+
                         <span class="text-third font-weight-bold p-1 more-hover">MORE</span>
+
                     </div>
+
                 </div>
             </section>
             <section class="col-md-4 bg-assist">
+
                 <!-- 切換按鈕 & 英文字 -->
                 <div class="d-flex flex-column align-items-end">
+
                     <div class="d-flex flex-column">
                         <i class="fas fa-list-ul text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-chart-bar text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-music text-white fa-lg mt-5 mr-5 pointer"></i>
+                        <i class="fas fa-trash-alt text-white fa-lg mt-5 mr-5 pointer"></i>
                     </div>
+
                     <h3 class="text-white font-weight-bold mt-8 rotate pb-5">POMODORO</h3>
                 </div>
             </section>
             <!--中心圓圈製作 -->
-            <div class="rounded-circle main-circle-border" :class="{'p-3': !start}" style="position:absolute;top: 60px; right: 180px;">
-                    <div class="rounded-circle w-100 h-100 d-flex justify-content-center align-items-center relative"
-                        :class='{"bg-white":start,"bg-third":!start,"second-circle-border-active":start,"second-circle-border":!start}'>
-                        <div class="rounded-circle d-flex justify-content-center align-items-center play-circle pointer"
-                            :class="{'bg-white': !start,'bg-third': start}">
-                            <span class="ml-2" @click="controlTimer"
-                                :class="{'text-third': !start,'text-white': start}">
-                                <i class="js-timer-play fa-3x"
-                                    :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
-                            </span>
-                        </div>
-                        <div class="cancel pointer" :class="{'bg-white': !start,'bg-third': start}" @click="resetTime"
-                            style="position: absolute; top:300px; left:310px;"></div>
+            <div class="rounded-circle main-circle-border" :class="{'p-3': !start}"
+                style="position:absolute;top: 60px; right: 180px;">
+                <div class="rounded-circle w-100 h-100 d-flex justify-content-center align-items-center relative"
+                    :class='{"bg-white":start,"bg-third":!start,"second-circle-border-active":start,"second-circle-border":!start}'>
+                    <div class="rounded-circle d-flex justify-content-center align-items-center play-circle pointer"
+                        :class="{'bg-white': !start,'bg-third': start}">
+                        <span class="ml-2" @click="controlTimer" :class="{'text-third': !start,'text-white': start}">
+                            <i class="js-timer-play fa-3x"
+                                :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
+                        </span>
                     </div>
+                    <div class="cancel pointer" :class="{'bg-white': !start,'bg-third': start}" @click="resetTime"
+                        style="position: absolute; top:300px; left:310px;"></div>
+                </div>
             </div>
         </div>
 
