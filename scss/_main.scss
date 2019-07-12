@@ -1,9 +1,10 @@
-//input placeholder顏色與文字設計
+//input 待辦 placeholder顏色與文字設計
 ::placeholder{
     font-weight: bold;
     color: $thirdColor;
     font-style: italic;
 };
+
 
 //hover 出現可點擊游標
 .pointer:hover{
@@ -78,4 +79,9 @@
         width: 7rem;
         height: 7rem;
     }
+}
+
+// input 加號 hover 動畫
+.plus:hover{
+    color: blue;
 }

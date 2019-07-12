@@ -20,8 +20,14 @@
                         <!-- 添加待辦input製作 -->
                         <div class="input-group">
                             <input type="text" placeholder="add a new mission…" class="p-3 w-75 border-0">
-                            <div class="input-group-prepend">
-                                <span class="text-center input-group-text text-third bg-white border-0 pointer"><i
+                            <div class="input-group-prepend ">
+                                <span class="text-center input-group-text text-third bg-white border-0 pointer plus"><i
+                                        class="fas fa-plus fa-lg"></i></span>
+                            </div>
+                            <!-- 設定時間(分鐘)input製作 -->
+                            <input type="number" placeholder="set your work time (only minutes and numbers)" class="p-3 w-75 border-0 mt-3"  v-model="settimeData">
+                            <div class="input-group-prepend mt-3">
+                                <span class="text-center input-group-text text-third bg-white border-0 pointer plus" @click="settingTime"><i
                                         class="fas fa-plus fa-lg "></i></span>
                             </div>
                         </div>

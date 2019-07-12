@@ -3,11 +3,12 @@ var app = new Vue({
     el: '#app',
     data: {
         start: false,
-        startTime: 481, 
-        minutes: 0,
-        seconds: 10,
+        startTime: 1500, 
+        minutes: 25,
+        seconds: '0'+0,
         counterId: {}, //用來儲存 setInterval 產生的 id
-        setTime: 15,
+        setTime: 1500,
+        settimeData: '', //用來儲存設定的時間，與input做雙向綁定
     },
     methods: {
         controlTimer: function () {
@@ -81,6 +82,38 @@ var app = new Vue({
             };
             window.clearInterval(vm.counterId);
             vm.counterId = {};
+        },
+        settingTime:function(){
+            let vm = this;
+            vm.start = false;
+            vm.setTime = vm.settimeData * 60;
+            if(vm.setTime > 5940){
+                alert('不能超過兩位數');
+                vm.setTime = 1500;
+                return;
+            }else if(vm.setTime < 0){
+                alert('不能是負數');
+                vm.setTime = 1500;
+                return;
+            }
+            vm.startTime = vm.setTime;
+            let minutes = Math.floor(vm.startTime / 60);
+            let seconds = vm.startTime % 60;
+            if (minutes < 10) {
+                vm.minutes = '0' + minutes;
+            } else {
+                vm.minutes = minutes;
+                vm.seconds = seconds;
+            };
+            if (seconds < 10) {
+                vm.seconds = '0' + seconds;
+            } else {
+                vm.minutes = minutes;
+                vm.seconds = seconds;
+            };
+            window.clearInterval(vm.counterId);
+            vm.counterId = {};
+            vm.settimeData = '';
         }
     },
 
