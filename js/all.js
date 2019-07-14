@@ -185,6 +185,27 @@ var app = new Vue({
             } else {
                 vm.seconds = seconds;
             };
+        },
+        goWork:function(){
+            let vm = this;
+            window.clearInterval(vm.counterId);
+            vm.counterId = {};
+            vm.isBreak = false;
+            vm.start = false ;
+            vm.setTime = 1500;
+            vm.startTime = vm.setTime;
+            let minute = Math.floor(vm.startTime / 60);
+            let seconds = vm.startTime % 60;
+            if (minute < 10) {
+                vm.minutes = '0' + minute;
+            } else {
+                vm.minutes = minute;
+            };
+            if (seconds < 10) {
+                vm.seconds = '0' + seconds;
+            } else {
+                vm.seconds = seconds;
+            };
         }
     },
     computed:{
@@ -231,7 +252,7 @@ var app = new Vue({
 
 //製作右列按鈕hover動畫
 $(document).ready(function () {
-    $('.fa-trash-alt,.fa-music,.fa-chart-bar,.fa-list-ul,.fa-mug-hot').hover(function () {
+    $('.fa-trash-alt,.fa-music,.fa-chart-bar,.fa-list-ul,.fa-mug-hot,.fa-tools').hover(function () {
             // over
             $(this).toggleClass('animated swing');
         }
