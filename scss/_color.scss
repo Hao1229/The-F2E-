@@ -2,6 +2,8 @@
 $mainColor: #FFEDF7;
 $assistColor: #003164;
 $thirdColor: #FF4384;
+$breakBlue: #E5F3FF;
+$breakDeepblue: #00A7FF;
 
 //背景顏色新增
 .bg-main{
@@ -14,6 +16,14 @@ $thirdColor: #FF4384;
 
 .bg-third{
     background-color: $thirdColor;
+};
+
+.bg-breakBlue{
+    background-color: $breakBlue;
+}
+
+.bg-breakDeepblue{
+    background-color: $breakDeepblue;
 }
 
 //文字顏色新增
@@ -25,3 +35,17 @@ $thirdColor: #FF4384;
 .text-assist{
     color: $assistColor;
 }
+
+.text-breakDeepblue{
+    color: $breakDeepblue;
+}
+
+.text-breakBlue{
+    color: $breakBlue;
+}
+
+//placeholder break 顏色
+.breakPlaceholder::placeholder{
+    color: $breakDeepblue;
+}
+

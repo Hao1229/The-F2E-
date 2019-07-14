@@ -11,6 +11,7 @@ var app = new Vue({
         settimeData: '', //用來儲存設定的時間，與input做雙向綁定
         newTodo:'',
         toDos:JSON.parse(localStorage.getItem('list')) || [],
+        isBreak: false
     },
     methods: {
         controlTimer: function () {
@@ -35,7 +36,18 @@ var app = new Vue({
             }else if(vm.start == false){
                 window.clearInterval(vm.counterId); //暫停且清空counterId
                 vm.counterId = {};
-            }
+            };
+            // //載入 progress bar.js 利用它來製作圓圈進度條
+            // let circleTime = vm.startTime*1000;
+            // let circleBar = new ProgressBar.Circle('.progressBar', {
+            //     strokeWidth: 3,
+            //     easing: 'easeInOut',
+            //     duration: circleTime,
+            //     color: '#FF4384',
+            //     svgStyle: null
+            //   });
+              
+            //   circleBar.animate(1.0);  // Number from 0.0 to 1.0
 
         },
         timeDecorate: function () {
@@ -57,6 +69,22 @@ var app = new Vue({
             if (vm.startTime == 0) {
                 window.clearInterval(vm.counterId);
                 vm.counterId = {};
+                vm.isBreak = true;
+                vm.start = false ;
+                vm.setTime = 300;
+                vm.startTime = vm.setTime;
+                let minute = Math.floor(vm.startTime / 60);
+                let seconds = vm.startTime % 60;
+                if (minute < 10) {
+                    vm.minutes = '0' + minute;
+                } else {
+                    vm.minutes = minute;
+                };
+                if (seconds < 10) {
+                    vm.seconds = '0' + seconds;
+                } else {
+                    vm.seconds = seconds;
+                };
             };
 
         },
@@ -136,6 +164,27 @@ var app = new Vue({
                     i-=1;
                 }
             }
+        },
+        goBreak:function(){
+            let vm = this;
+            window.clearInterval(vm.counterId);
+            vm.counterId = {};
+            vm.isBreak = true;
+            vm.start = false ;
+            vm.setTime = 300;
+            vm.startTime = vm.setTime;
+            let minute = Math.floor(vm.startTime / 60);
+            let seconds = vm.startTime % 60;
+            if (minute < 10) {
+                vm.minutes = '0' + minute;
+            } else {
+                vm.minutes = minute;
+            };
+            if (seconds < 10) {
+                vm.seconds = '0' + seconds;
+            } else {
+                vm.seconds = seconds;
+            };
         }
     },
     computed:{
@@ -182,7 +231,7 @@ var app = new Vue({
 
 //製作右列按鈕hover動畫
 $(document).ready(function () {
-    $('.fa-trash-alt,.fa-music,.fa-chart-bar,.fa-list-ul').hover(function () {
+    $('.fa-trash-alt,.fa-music,.fa-chart-bar,.fa-list-ul,.fa-mug-hot').hover(function () {
             // over
             $(this).toggleClass('animated swing');
         }

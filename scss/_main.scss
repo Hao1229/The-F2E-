@@ -28,6 +28,13 @@
     border: 1px solid $thirdColor !important;
 }
 
+.circle-timer-finish{
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 1px solid $assistColor !important;
+    background-color: $assistColor !important;
+}
+
 //正在進行工作的計時器
 .timer{
     font-weight: bolder;
@@ -56,14 +63,21 @@
     border: 4px solid $thirdColor !important;
 }
 
+.main-circle-border-break{
+    width: 35rem;
+    height: 35rem;
+    border: 4px solid $breakDeepblue !important;
+}
+
+
 //第二大圓圈邊框
 .second-circle-border{
     border: 3px solid $thirdColor !important;
 }
 
-//第二大圓圈邊框-啟動
-.second-circle-border-active{
-    border: 1rem solid $thirdColor !important;
+.second-circle-borde-break{
+    background-color: $breakDeepblue ;
+    border: 3px solid $breakDeepblue !important;
 }
 
 //取消小方塊
@@ -95,7 +109,7 @@
 .more-hover{
     transition: all 1s;
     &:hover{
-        color: blue !important;
+        color: green !important;
     }
     
 }
@@ -103,4 +117,29 @@
 //待辦完成畫線
 .completed{
     text-decoration: line-through;
+}
+
+// //處理進度條位置
+// svg{
+//     position:absolute;
+//     top: 0; 
+//     left: 0;
+//     z-index: 0;
+// }
+
+
+//進度條 test
+.progressBar:hover{
+    background-color: $thirdColor;
+    animation: circle ease-in-out 3s;
+    transform: rotate(180deg);
+}
+
+@keyframes circle{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(180deg);
+    }
 }

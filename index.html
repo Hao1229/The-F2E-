@@ -16,22 +16,22 @@
 <body>
     <div class="container-fluid relative">
         <div class="row" id="app">
-            <section class="col-md-8 bg-main pb-6">
+            <section class="col-md-8 bg-main pb-6" :class="{'bg-breakBlue':isBreak}">
                 <div class="ml-5 mt-5 w-75">
                     <!-- 添加待辦input製作 -->
                     <div class="input-group">
                         <input type="text" placeholder="add a new mission…" class="p-3 w-75 border-0" v-model='newTodo'
-                            @keyup.enter='addTodo'>
+                            @keyup.enter='addTodo' :class="{'breakPlaceholder':isBreak}">
                         <div class="input-group-prepend ">
                             <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
-                                @click="addTodo"><i class="fas fa-plus fa-lg"></i></span>
+                                @click="addTodo" :class="{'text-breakDeepblue':isBreak}"><i class="fas fa-plus fa-lg"></i></span>
                         </div>
                         <!-- 設定時間(分鐘)input製作 -->
                         <input type="number" placeholder="stop your time & set your work time (only minutes)"
-                            class="p-3 w-75 border-0 mt-3" v-model="settimeData" @keyup.enter="settingTime">
+                            class="p-3 w-75 border-0 mt-3" v-model="settimeData" @keyup.enter="settingTime" :class="{'breakPlaceholder':isBreak}">
                         <div class="input-group-prepend mt-3">
                             <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
-                                @click="settingTime"><i class="fas fa-plus fa-lg "></i></span>
+                                @click="settingTime" :class="{'text-breakDeepblue':isBreak}"><i class="fas fa-plus fa-lg "></i></span>
                         </div>
                     </div>
                     <!-- 進行中工作區域 -->
@@ -48,19 +48,19 @@
                                     :class="{'completed': item.finish}">
                                     {{item.title}}</h5>
 
-                                <span class="rounded-circle circle-timer"></span>
+                                <span class="rounded-circle " :class="{'circle-timer':!isBreak,'circle-timer-finish':isBreak}"></span>
 
                             </div>
 
                         </div>
-                        <span class="timer text-third" id="js-timer-time">{{minutes}}:{{seconds}}</span>
+                        <span class="timer" id="js-timer-time" :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">{{minutes}}:{{seconds}}</span>
                     </div>
                     <!-- Todolist待辦事項 -->
                     <ul class="list-group list-group-flush w-75 mt-5"
                         style="border-bottom: rgba(0,0,0,.125) 1px solid !important">
 
-                        <li class="list-group-item bg-main text-assist font-weight-bold border-top-0 d-flex px-0"
-                            v-for='(item,index) in secondThing'>
+                        <li class="list-group-item text-assist font-weight-bold border-top-0 d-flex px-0"
+                            v-for='(item,index) in secondThing' :class="{'bg-main':!isBreak,'bg-breakBlue':isBreak}">
 
                             <span class="rounded-circle willtodo-circle mr-3 pointer"
                                 @click="item.finish = !item.finish"
@@ -74,8 +74,8 @@
 
                         </li>
 
-                        <li class="list-group-item bg-main text-assist font-weight-bold d-flex px-0"
-                            v-for='(item,index) in thirdThing'>
+                        <li class="list-group-item text-assist font-weight-bold d-flex px-0"
+                            v-for='(item,index) in thirdThing' :class="{'bg-main':!isBreak,'bg-breakBlue':isBreak}">
 
                             <span class="rounded-circle willtodo-circle mr-3 pointer"
                                 @click="item.finish = !item.finish"
@@ -89,8 +89,8 @@
 
                         </li>
 
-                        <li class="list-group-item bg-main text-assist font-weight-bold d-flex px-0"
-                            v-for='(item,index) in fourthThing'>
+                        <li class="list-group-item text-assist font-weight-bold d-flex px-0"
+                            v-for='(item,index) in fourthThing' :class="{'bg-main':!isBreak,'bg-breakBlue':isBreak}">
 
                             <span class="rounded-circle willtodo-circle mr-3 pointer"
                                 @click="item.finish = !item.finish"
@@ -108,7 +108,7 @@
 
                     <div class="d-flex flex-row-reverse w-75 pointer" v-if="toDos.length > 4">
 
-                        <span class="text-third font-weight-bold p-1 more-hover">MORE</span>
+                        <span class="font-weight-bold p-1 more-hover" :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">MORE</span>
 
                     </div>
 
@@ -124,26 +124,36 @@
                         <i class="fas fa-chart-bar text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-music text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-trash-alt text-white fa-lg mt-5 mr-5 pointer" @click="deleteFinish"></i>
+                        <i class="fas fa-mug-hot fa-lg mt-5 mr-5 pointer text-white" @click="goBreak"></i>
                     </div>
 
                     <h3 class="text-white font-weight-bold mt-8 rotate pb-5">POMODORO</h3>
                 </div>
             </section>
             <!--中心圓圈製作 -->
-            <div class="rounded-circle main-circle-border" :class="{'p-3': !start}"
-                style="position:absolute;top: 60px; right: 180px;">
-                <div class="rounded-circle w-100 h-100 d-flex justify-content-center align-items-center relative"
-                    :class='{"bg-white":start,"bg-third":!start,"second-circle-border-active":start,"second-circle-border":!start}'>
+            <div class="rounded-circle" 
+                style="position:absolute;top: 60px; right: 180px;" :class="{'main-circle-border-break':isBreak,'main-circle-border':!isBreak}">
+
+                <div class="rounded-circle w-100 h-100 p-3 relative">
+            
+                <div class="rounded-circle w-100 h-100 d-flex justify-content-center align-items-center relative "
+                    :class='{"bg-white":start,"bg-third":!start,"second-circle-border":!isBreak,"second-circle-borde-break":isBreak}'>
+
                     <div class="rounded-circle d-flex justify-content-center align-items-center play-circle pointer"
-                        :class="{'bg-white': !start,'bg-third': start}">
-                        <span class="ml-2" @click="controlTimer" :class="{'text-third': !start,'text-white': start}">
+                        :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue': isBreak}">
+
+                        <span class="ml-2" @click="controlTimer" :class="{'text-third': !start,'text-white': start,'text-breakDeepblue':isBreak}">
                             <i class="js-timer-play fa-3x"
                                 :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
                         </span>
+
                     </div>
-                    <div class="cancel pointer" :class="{'bg-white': !start,'bg-third': start}" @click="resetTime"
-                        style="position: absolute; top:300px; left:310px;"></div>
+                    <div class="cancel pointer" :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue':isBreak}" @click="resetTime"
+                        style="position: absolute; top:300px; left:310px"></div>
                 </div>
+
+            </div>
+
             </div>
         </div>
 
@@ -161,6 +171,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
     <script src="js/all.js"></script>
 </body>
 

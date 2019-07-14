@@ -82,12 +82,44 @@ html body {
   background-color: #FF4384;
 }
 
+.bg-breakBlue {
+  background-color: #E5F3FF;
+}
+
+.bg-breakDeepblue {
+  background-color: #00A7FF;
+}
+
 .text-third {
   color: #FF4384;
 }
 
 .text-assist {
   color: #003164;
+}
+
+.text-breakDeepblue {
+  color: #00A7FF;
+}
+
+.text-breakBlue {
+  color: #E5F3FF;
+}
+
+.breakPlaceholder::-webkit-input-placeholder {
+  color: #00A7FF;
+}
+
+.breakPlaceholder:-ms-input-placeholder {
+  color: #00A7FF;
+}
+
+.breakPlaceholder::-ms-input-placeholder {
+  color: #00A7FF;
+}
+
+.breakPlaceholder::placeholder {
+  color: #00A7FF;
 }
 
 ::-webkit-input-placeholder {
@@ -135,6 +167,13 @@ html body {
   border: 1px solid #FF4384 !important;
 }
 
+.circle-timer-finish {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1px solid #003164 !important;
+  background-color: #003164 !important;
+}
+
 .timer {
   font-weight: bolder;
   font-size: 10rem;
@@ -162,12 +201,19 @@ html body {
   border: 4px solid #FF4384 !important;
 }
 
+.main-circle-border-break {
+  width: 35rem;
+  height: 35rem;
+  border: 4px solid #00A7FF !important;
+}
+
 .second-circle-border {
   border: 3px solid #FF4384 !important;
 }
 
-.second-circle-border-active {
-  border: 1rem solid #FF4384 !important;
+.second-circle-borde-break {
+  background-color: #00A7FF;
+  border: 3px solid #00A7FF !important;
 }
 
 .cancel {
@@ -200,10 +246,40 @@ html body {
 }
 
 .more-hover:hover {
-  color: blue !important;
+  color: green !important;
 }
 
 .completed {
   text-decoration: line-through;
+}
+
+.progressBar:hover {
+  background-color: #FF4384;
+  -webkit-animation: circle ease-in-out 3s;
+          animation: circle ease-in-out 3s;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+@-webkit-keyframes circle {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+
+@keyframes circle {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
 }
 /*# sourceMappingURL=all.css.map */
