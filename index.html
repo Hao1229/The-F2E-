@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="https://i.imgur.com/1qjvzA6.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="css/all.css">
 </head>
 
@@ -24,14 +24,17 @@
                             @keyup.enter='addTodo' :class="{'breakPlaceholder':isBreak}">
                         <div class="input-group-prepend ">
                             <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
-                                @click="addTodo" :class="{'text-breakDeepblue':isBreak}"><i class="fas fa-plus fa-lg"></i></span>
+                                @click="addTodo" :class="{'text-breakDeepblue':isBreak}"><i
+                                    class="fas fa-plus fa-lg"></i></span>
                         </div>
                         <!-- 設定時間(分鐘)input製作 -->
                         <input type="number" placeholder="stop your time & set your work time (only minutes)"
-                            class="p-3 w-75 border-0 mt-3" v-model="settimeData" @keyup.enter="settingTime" :class="{'breakPlaceholder':isBreak}">
+                            class="p-3 w-75 border-0 mt-3" v-model="settimeData" @keyup.enter="settingTime"
+                            :class="{'breakPlaceholder':isBreak}">
                         <div class="input-group-prepend mt-3">
                             <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
-                                @click="settingTime" :class="{'text-breakDeepblue':isBreak}"><i class="fas fa-plus fa-lg "></i></span>
+                                @click="settingTime" :class="{'text-breakDeepblue':isBreak}"><i
+                                    class="fas fa-plus fa-lg "></i></span>
                         </div>
                     </div>
                     <!-- 進行中工作區域 -->
@@ -48,12 +51,14 @@
                                     :class="{'completed': item.finish}">
                                     {{item.title}}</h5>
 
-                                <span class="rounded-circle " :class="{'circle-timer':!isBreak,'circle-timer-finish':isBreak}"></span>
+                                <span class="rounded-circle "
+                                    :class="{'circle-timer':!isBreak,'circle-timer-finish':isBreak}"></span>
 
                             </div>
 
                         </div>
-                        <span class="timer" id="js-timer-time" :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">{{minutes}}:{{seconds}}</span>
+                        <span class="timer" id="js-timer-time"
+                            :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">{{minutes}}:{{seconds}}</span>
                     </div>
                     <!-- Todolist待辦事項 -->
                     <ul class="list-group list-group-flush w-75 mt-5"
@@ -108,7 +113,8 @@
 
                     <div class="d-flex flex-row-reverse w-75 pointer" v-if="toDos.length > 4">
 
-                        <span class="font-weight-bold p-1 more-hover" :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">MORE</span>
+                        <span class="font-weight-bold p-1 more-hover"
+                            :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">MORE</span>
 
                     </div>
 
@@ -120,7 +126,7 @@
                 <div class="d-flex flex-column align-items-end">
 
                     <div class="d-flex flex-column">
-                        <i class="fas fa-list-ul text-white fa-lg mt-5 mr-5 pointer"></i>
+                        <i class="fas fa-list-ul text-white fa-lg mt-5 mr-5 pointer" @click="openList = !openList"></i>
                         <i class="fas fa-chart-bar text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-music text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-trash-alt text-white fa-lg mt-5 mr-5 pointer" @click="deleteFinish"></i>
@@ -132,48 +138,55 @@
                 </div>
             </section>
             <!--中心圓圈製作 -->
-            <div class="rounded-circle" 
-                style="position:absolute;top: 60px; right: 180px;" :class="{'main-circle-border-break':isBreak,'main-circle-border':!isBreak}">
+            <div style="position:absolute;top: 60px; right: 185px; width: 540px;height: 540px;" class="relative">
 
-                <div class="rounded-circle w-100 h-100 p-3 relative">
-            
-                <div class="rounded-circle w-100 h-100 d-flex justify-content-center align-items-center relative "
-                    :class='{"bg-white":start,"bg-third":!start,"second-circle-border":!isBreak,"second-circle-borde-break":isBreak}'>
+                <svg style="transform:rotate(-90deg);width:540px;height:540px;" class="rounded-circle" :class="{'outercircleBorder': !isBreak,'outercircleBorder-break': isBreak}">
+                    <circle cx='270' cy='270' r='135' stroke-width="270" :stroke-dasharray='strokeDasharray(135)'
+                        :stroke-dashoffset='strokeDashoffset(135,Math.min(1,startTime/setTime))' fill='none' :class="{'workColor':!isBreak,'breakColor':isBreak}">
+                </svg>
+
+                <div class="rounded-circle d-flex justify-content-center align-items-center "
+                    :class='{"bg-white":start,"bg-third":!start,"second-circle-border":!isBreak,"second-circle-border-break":isBreak}'
+                    style="position:absolute;top: 20px; left: 20px; width: 500px; height:500px;">
 
                     <div class="rounded-circle d-flex justify-content-center align-items-center play-circle pointer"
-                        :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue': isBreak}">
+                    :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue': isBreak}">
 
-                        <span class="ml-2" @click="controlTimer" :class="{'text-third': !start,'text-white': start,'text-breakDeepblue':isBreak}">
-                            <i class="js-timer-play fa-3x"
-                                :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
-                        </span>
+                    <span class="ml-2" @click="controlTimer"
+                        :class="{'text-third': !start,'text-white': start,'text-breakDeepblue':isBreak}">
+                        <i class="js-timer-play fa-3x"
+                            :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
+                    </span>
 
-                    </div>
-                    <div class="cancel pointer" :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue':isBreak}" @click="resetTime"
-                        style="position: absolute; top:300px; left:310px"></div>
+                </div>
+                <div class="cancel pointer"
+                    :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue':isBreak}"
+                    @click="resetTime" style="position: absolute; top:300px; left:310px"></div>
+
                 </div>
 
             </div>
 
-            </div>
+            <!-- 頁面試作 -->
+            <!-- <div style="width: 2000px; height:500px; transition: all ease 3s" class="bg-success" v-if="openList"></div> -->
+            <!-- <div style="width: 2000px; height:500px; transform: translateX(-2000px) " class="bg-success animated" :class="{'bounceOutLeft':!openList,' bounceInRight':openList}"></div> -->
         </div>
 
-    </div>
+       
 
 
-    <script src="https://kit.fontawesome.com/7e3354ec65.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
-    <script src="js/all.js"></script>
+        <script src="https://kit.fontawesome.com/7e3354ec65.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+        <script src="js/all.js"></script>
 </body>
 
 </html>

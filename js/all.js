@@ -11,7 +11,8 @@ var app = new Vue({
         settimeData: '', //用來儲存設定的時間，與input做雙向綁定
         newTodo:'',
         toDos:JSON.parse(localStorage.getItem('list')) || [],
-        isBreak: false
+        isBreak: false,
+        openList: false,
     },
     methods: {
         controlTimer: function () {
@@ -37,17 +38,6 @@ var app = new Vue({
                 window.clearInterval(vm.counterId); //暫停且清空counterId
                 vm.counterId = {};
             };
-            // //載入 progress bar.js 利用它來製作圓圈進度條
-            // let circleTime = vm.startTime*1000;
-            // let circleBar = new ProgressBar.Circle('.progressBar', {
-            //     strokeWidth: 3,
-            //     easing: 'easeInOut',
-            //     duration: circleTime,
-            //     color: '#FF4384',
-            //     svgStyle: null
-            //   });
-              
-            //   circleBar.animate(1.0);  // Number from 0.0 to 1.0
 
         },
         timeDecorate: function () {
@@ -206,7 +196,14 @@ var app = new Vue({
             } else {
                 vm.seconds = seconds;
             };
-        }
+        },
+        strokeDasharray:function(r){
+            return r * 2 * Math.PI;
+        },
+        strokeDashoffset:function(r,el){
+            return (this.strokeDasharray(r) * el );
+        },
+       
     },
     computed:{
         firstThing:function(){
@@ -257,5 +254,6 @@ $(document).ready(function () {
             $(this).toggleClass('animated swing');
         }
     );
+
 });
 

@@ -57,15 +57,11 @@
 }
 
 //中間大圓圈邊框
-.main-circle-border{
-    width: 35rem;
-    height: 35rem;
+.outercircleBorder{
     border: 4px solid $thirdColor !important;
 }
 
-.main-circle-border-break{
-    width: 35rem;
-    height: 35rem;
+.outercircleBorder-break{
     border: 4px solid $breakDeepblue !important;
 }
 
@@ -75,7 +71,7 @@
     border: 3px solid $thirdColor !important;
 }
 
-.second-circle-borde-break{
+.second-circle-border-break{
     background-color: $breakDeepblue ;
     border: 3px solid $breakDeepblue !important;
 }
@@ -128,18 +124,5 @@
 // }
 
 
-//進度條 test
-.progressBar:hover{
-    background-color: $thirdColor;
-    animation: circle ease-in-out 3s;
-    transform: rotate(180deg);
-}
 
-@keyframes circle{
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(180deg);
-    }
-}
+
