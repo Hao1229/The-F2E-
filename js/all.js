@@ -13,6 +13,7 @@ var app = new Vue({
         toDos:JSON.parse(localStorage.getItem('list')) || [],
         isBreak: false,
         openList: false,
+        unfold: false,
     },
     methods: {
         controlTimer: function () {
@@ -230,6 +231,12 @@ var app = new Vue({
                 return index === 3;
             })
         },
+        uncompleted:function(){
+            let vm = this;
+            return vm.toDos.filter(function(item){
+                return item.finish === false;
+            })
+        }
     },
     watch:{
         toDos:{
@@ -247,13 +254,22 @@ var app = new Vue({
 
 //jQuery
 
-//製作右列按鈕hover動畫
+
 $(document).ready(function () {
+    //製作右列按鈕hover動畫
     $('.fa-trash-alt,.fa-music,.fa-chart-bar,.fa-list-ul,.fa-mug-hot,.fa-tools').hover(function () {
             // over
             $(this).toggleClass('animated swing');
         }
     );
+    //收合todolist效果
+    $('.todoStorage').click(function (e) { 
+        e.preventDefault();
+        $('.todoShow').slideToggle(1000);
+        $('.rotate').delay(1000).toggleClass('fa-caret-up');
+        $('.rotate').delay(1000).toggleClass('fa-caret-down');
+        
+    });
 
 });
 

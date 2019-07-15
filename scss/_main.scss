@@ -51,8 +51,17 @@
     }
 }
 
+.willtodo-circle-detail{
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid white ;
+    &:hover{
+        box-shadow: 1px 2px 2px white;
+    }
+}
+
 //字體旋轉90度
-.rotate{
+.rotate-90{
     transform: rotate(90deg);
 }
 
@@ -106,7 +115,7 @@
     transition: all 1s;
     &:hover{
         color: green !important;
-    }
+    };
     
 }
 
@@ -115,14 +124,26 @@
     text-decoration: line-through;
 }
 
-// //處理進度條位置
-// svg{
-//     position:absolute;
-//     top: 0; 
-//     left: 0;
-//     z-index: 0;
+
+//toDolist 頁面製作
+// .todolistShow{
+//     transform: translateX(0px) !important;
+//     z-index: 9999;
 // }
 
+//移除ul預設樣式
+.removeulDisplay{
+    list-style-type: none;
+}
 
+//todolist 收起功能
+.todoStorage{
+    background-color: hsla(0,0%,100%,.2);
+}
+
+//todolist 收合展開效果
+.todoshowStyle{
+    border-bottom: rgba(255,255,255,0.7) 1px solid ;
+}
 
 

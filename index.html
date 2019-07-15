@@ -15,7 +15,7 @@
 
 <body>
     <div class="container-fluid relative">
-        <div class="row" id="app">
+        <div class="row relative" id="app">
             <section class="col-md-8 bg-main pb-6" :class="{'bg-breakBlue':isBreak}">
                 <div class="ml-5 mt-5 w-75">
                     <!-- 添加待辦input製作 -->
@@ -134,15 +134,17 @@
                         <i class="fas fa-tools fa-lg mt-5 mr-5 pointer text-white" @click="goWork"></i>
                     </div>
 
-                    <h3 class="text-white font-weight-bold mt-8 rotate pb-5">POMODORO</h3>
+                    <h3 class="text-white font-weight-bold mt-8 rotate-90 pb-5">POMODORO</h3>
                 </div>
             </section>
             <!--中心圓圈製作 -->
             <div style="position:absolute;top: 60px; right: 185px; width: 540px;height: 540px;" class="relative">
 
-                <svg style="transform:rotate(-90deg);width:540px;height:540px;" class="rounded-circle" :class="{'outercircleBorder': !isBreak,'outercircleBorder-break': isBreak}">
+                <svg style="transform:rotate(-90deg);width:540px;height:540px;" class="rounded-circle"
+                    :class="{'outercircleBorder': !isBreak,'outercircleBorder-break': isBreak}">
                     <circle cx='270' cy='270' r='135' stroke-width="270" :stroke-dasharray='strokeDasharray(135)'
-                        :stroke-dashoffset='strokeDashoffset(135,Math.min(1,startTime/setTime))' fill='none' :class="{'workColor':!isBreak,'breakColor':isBreak}">
+                        :stroke-dashoffset='strokeDashoffset(135,Math.min(1,startTime/setTime))' fill='none'
+                        :class="{'workColor':!isBreak,'breakColor':isBreak}">
                 </svg>
 
                 <div class="rounded-circle d-flex justify-content-center align-items-center "
@@ -150,43 +152,103 @@
                     style="position:absolute;top: 20px; left: 20px; width: 500px; height:500px;">
 
                     <div class="rounded-circle d-flex justify-content-center align-items-center play-circle pointer"
-                    :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue': isBreak}">
+                        :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue': isBreak}">
 
-                    <span class="ml-2" @click="controlTimer"
-                        :class="{'text-third': !start,'text-white': start,'text-breakDeepblue':isBreak}">
-                        <i class="js-timer-play fa-3x"
-                            :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
-                    </span>
+                        <span class="ml-2" @click="controlTimer"
+                            :class="{'text-third': !start,'text-white': start,'text-breakDeepblue':isBreak}">
+                            <i class="js-timer-play fa-3x"
+                                :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
+                        </span>
 
-                </div>
-                <div class="cancel pointer"
-                    :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue':isBreak}"
-                    @click="resetTime" style="position: absolute; top:300px; left:310px"></div>
+                    </div>
+                    <div class="cancel pointer"
+                        :class="{'bg-white': !start,'bg-third': start,'bg-breakDeepblue':isBreak}" @click="resetTime"
+                        style="position: absolute; top:300px; left:310px"></div>
 
                 </div>
 
             </div>
 
             <!-- 頁面試作 -->
-            <!-- <div style="width: 2000px; height:500px; transition: all ease 3s" class="bg-success" v-if="openList"></div> -->
-            <!-- <div style="width: 2000px; height:500px; transform: translateX(-2000px) " class="bg-success animated" :class="{'bounceOutLeft':!openList,' bounceInRight':openList}"></div> -->
+            <div :class="{'todolistShow': openList}" class="bg-assist w-100 mt-3" style="height: 800px;">
+                <section class="row">
+                    <ul class="removeulDisplay text-default col-md-4 ml-5">
+
+                        <li :class="{'text-third':openList}" class="font-weight-bold h3" @click="openList = !openList">
+                            <i class="fas fa-list-ul fa-sm mt-5 mr-3 pointer"></i><span class="pointer">TO-DO
+                                LIST</span></li>
+
+                        <li class="font-weight-bold h3">
+                            <i class="fas fa-chart-bar fa-sm mt-5 mr-3 pointer"></i><span
+                                class="pointer">ANALYTICS</span></li>
+
+                        <li class="font-weight-bold h3">
+                            <i class="fas fa-music fa-sm mt-5 mr-3 pointer"></i><span class="pointer">RINGTONES</span>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex flex-column col-md-5 h-100 mt-5">
+
+                        <div class="input-group">
+
+                            <input type="text" placeholder="add a new mission…" class="p-3 w-75 border-0"
+                                v-model='newTodo' @keyup.enter='addTodo' :class="{'breakPlaceholder':isBreak}">
+
+                            <div class="input-group-prepend ">
+                                <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
+                                    @click="addTodo" :class="{'text-breakDeepblue':isBreak}"><i
+                                        class="fas fa-plus fa-lg"></i></span>
+                            </div>
+
+                        </div>
+
+
+                        <ul class="w-100 mt-5 pl-0 pr-6 removeulDisplay">
+                            <li class="todoStorage font-weight-bold pt-3 pl-3 pb-1 mb-4 pointer d-flex">
+                                <h4 class="text-white">TO-DO</h4><i
+                                    class="fas fa-caret-down text-white ml-auto mr-4 mt-1 fa-lg rotate"></i>
+                            </li>
+
+                            <ul class="w-100 pl-0 pr-2 todoShow" style="display: none">
+                                <li class="text-white bg-assist font-weight-bold d-flex mb-3 todoshowStyle"
+                                    v-for='(item,index) in uncompleted'>
+
+                                    <span class="rounded-circle willtodo-circle-detail mr-3 mb-2 pointer"
+                                        @click="item.finish = !item.finish"></span>
+
+                                    <span>{{item.title}}</span>
+
+                                    <span class="text-center ml-auto pointer" @click="todoChange(item)">
+                                        <i class="far fa-play-circle"></i></span>
+
+                                </li>
+                            </ul>
+
+                        </ul>
+
+                    </div>
+                </section>
+
+
+
+            </div>
+            <!-- style="transform: translateX(2000px); position: absolute;top: 0;left: 0;bottom: 0; overflow: hidden;transition:ease-in-out 2s" -->
         </div>
+    </div>
 
-       
 
 
-        <script src="https://kit.fontawesome.com/7e3354ec65.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-            crossorigin="anonymous"></script>
-        <script src="js/all.js"></script>
+
+    <script src="https://kit.fontawesome.com/7e3354ec65.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script src="js/all.js"></script>
 </body>
 
 </html>

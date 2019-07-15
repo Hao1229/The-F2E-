@@ -106,6 +106,10 @@ html body {
   color: #E5F3FF;
 }
 
+.text-default {
+  color: rgba(255, 255, 255, 0.3);
+}
+
 .breakPlaceholder::-webkit-input-placeholder {
   color: #00A7FF;
 }
@@ -198,7 +202,18 @@ html body {
           box-shadow: 1px 2px 2px #003164;
 }
 
-.rotate {
+.willtodo-circle-detail {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid white;
+}
+
+.willtodo-circle-detail:hover {
+  -webkit-box-shadow: 1px 2px 2px white;
+          box-shadow: 1px 2px 2px white;
+}
+
+.rotate-90 {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
@@ -255,5 +270,17 @@ html body {
 
 .completed {
   text-decoration: line-through;
+}
+
+.removeulDisplay {
+  list-style-type: none;
+}
+
+.todoStorage {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.todoshowStyle {
+  border-bottom: rgba(255, 255, 255, 0.7) 1px solid;
 }
 /*# sourceMappingURL=all.css.map */
