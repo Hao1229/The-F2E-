@@ -16,9 +16,8 @@
 <body>
     <div class="container-fluid">
         <div class="row relative" id="app">
-
             <!-- todolist頁面 -->
-            <div :class="{'todolistShow': openList}" class="bg-assist col-12 vh-100 relative animated bounceInRight" v-show="openList" >
+            <div class="bg-assist col-12 vh-100 relative animated bounceInRight" v-show="openList">
                 <section class="row">
 
                     <ul class="removeulDisplay text-default col-md-4 ml-5">
@@ -27,9 +26,9 @@
                             <i class="fas fa-list-ul fa-sm mt-5 mr-3"></i><span>TO-DO
                                 LIST</span></li>
 
-                        <li class="font-weight-bold h3 optionbgChange">
-                            <i class="fas fa-chart-bar fa-sm mt-5 mr-3 pointer"></i><span
-                                class="pointer">ANALYTICS</span></li>
+                        <li class="font-weight-bold h3 optionbgChange" @click="openAnalytics = true">
+                            <i class="fas fa-chart-bar fa-sm mt-5 mr-3 pointer" @click="openList = false"></i><span
+                                class="pointer" @click="openList = false">ANALYTICS</span></li>
 
                         <li class="font-weight-bold h3 optionbgChange">
                             <i class="fas fa-music fa-sm mt-5 mr-3 pointer"></i><span class="pointer">RINGTONES</span>
@@ -141,13 +140,14 @@
                     </div>
                 </div>
                 <div class="text-white pointer " @click="openList = false">
-                        <i class="fas fa-times fa-3x closePage" @click = 'indexOpen = true'></i>
+                    <i class="fas fa-times fa-3x closePage" @click='indexOpen = true'></i>
                 </div>
             </div>
 
 
             <!-- 主頁面 -->
-            <section class="col-md-8 bg-main pb-6 animated bounceInRight" :class="{'bg-breakBlue':isBreak}" v-show="indexOpen">
+            <section class="col-md-8 bg-main pb-6 animated bounceInRight" :class="{'bg-breakBlue':isBreak}"
+                v-show="indexOpen">
                 <div class="ml-5 mt-5 w-75">
                     <!-- 添加待辦input製作 -->
                     <div class="input-group">
@@ -257,9 +257,11 @@
                 <div class="d-flex flex-column align-items-end">
 
                     <div class="d-flex flex-column">
-                        <div class="mt-5 mr-5 pointer" @click="openList = true"><i class="fas fa-list-ul text-white fa-lg" @click="indexOpen = false"></i></div>
-
-                        <i class="fas fa-chart-bar text-white fa-lg mt-5 mr-5 pointer"></i>
+                        <div class="mt-5 mr-5 pointer" @click="openList = true"><i
+                                class="fas fa-list-ul text-white fa-lg" @click="indexOpen = false"></i></div>
+                        <div class="mt-5 mr-5 pointer" @click="openAnalytics = true">
+                            <i class="fas fa-chart-bar text-white fa-lg" @click="indexOpen = false"></i>
+                        </div>
                         <i class="fas fa-music text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-trash-alt text-white fa-lg mt-5 mr-5 pointer" @click="deleteFinish"></i>
                         <i class="fas fa-mug-hot fa-lg mt-5 mr-5 pointer text-white" @click="goBreak"></i>
@@ -270,8 +272,8 @@
                 </div>
             </section>
             <!--中心圓圈製作 -->
-            <div style="position:absolute;top: 60px; right: 185px; width: 540px;height: 540px;" class="relative animated bounceInRight"
-                v-show="indexOpen">
+            <div style="position:absolute;top: 60px; right: 185px; width: 540px;height: 540px;"
+                class="relative animated bounceInRight" v-show="indexOpen">
 
                 <svg style="transform:rotate(-90deg);width:540px;height:540px;" class="rounded-circle"
                     :class="{'outercircleBorder': !isBreak,'outercircleBorder-break': isBreak}">
@@ -301,94 +303,66 @@
 
             </div>
 
-            <!-- toDolist頁面 -->
-            <!-- <div :class="{'todolistShow': openList}" class="bg-assist w-100 mt-3 relative">
+            <!-- 分析頁面 -->
+            <div class="bg-assist col-12 vh-100 relative animated bounceInRight mt-3" v-show="openAnalytics">
                 <section class="row">
 
                     <ul class="removeulDisplay text-default col-md-4 ml-5">
 
-                        <li class="font-weight-bold h3 text-third">
-                            <i class="fas fa-list-ul fa-sm mt-5 mr-3"></i><span>TO-DO
+                        <li class="font-weight-bold h3 optionbgChange" @click="openList = true">
+                            <i class="fas fa-list-ul fa-sm mt-5 mr-3 pointer" @click="openAnalytics = false"></i><span
+                                class="pointer" @click="openAnalytics = false">TO-DO
                                 LIST</span></li>
 
-                        <li class="font-weight-bold h3">
-                            <i class="fas fa-chart-bar fa-sm mt-5 mr-3 pointer"></i><span
-                                class="pointer">ANALYTICS</span></li>
+                        <li class="font-weight-bold h3 text-third">
+                            <i class="fas fa-chart-bar fa-sm mt-5 mr-3"></i><span>ANALYTICS</span></li>
 
-                        <li class="font-weight-bold h3">
+                        <li class="font-weight-bold h3 optionbgChange">
                             <i class="fas fa-music fa-sm mt-5 mr-3 pointer"></i><span class="pointer">RINGTONES</span>
                         </li>
                     </ul>
 
 
-                    <div class="d-flex flex-column col-md-5 h-100 mt-5">
+                    <div class="d-flex flex-column col-md-5 h-100 ">
 
-                        <div class="input-group">
+                        <ul class="w-100 mt-5 pl-0 pr-6 removeulDisplay">
+                            <li class="titleBg font-weight-bold pt-3 pl-3 pb-1 mb-4  d-flex">
+                                <h4 class="text-white">FOCUS TIME</h4>
+                            </li>
+                        </ul>
 
-                            <input type="text" placeholder="add a new mission…" class="p-3 w-75 border-0"
-                                v-model='newTodo' @keyup.enter='addTodo' :class="{'breakPlaceholder':isBreak}">
-
-                            <div class="input-group-prepend ">
-                                <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
-                                    @click="addTodo" :class="{'text-breakDeepblue':isBreak}"><i
-                                        class="fas fa-plus fa-lg"></i></span>
+                        <div class="d-flex">
+                            <div class="mr-5">
+                                <h5 class="text-white font-weight-bold">TODAY</h5>
+                                <span class="text-third display-3 font-weight-bold">20 <span class="text-default h5">/
+                                        TOMATO</span></span>
                             </div>
-
+                            <div>
+                                <h5 class="text-white font-weight-bold">WEEK</h5>
+                                <span class="text-third display-3 font-weight-bold">108 <span class="text-default h5">/
+                                        TOMATO</span></span>
+                            </div>
                         </div>
 
-
-                        <ul class="w-100 mt-5 pl-0 pr-6 removeulDisplay">
-                            <li class="todoStorage font-weight-bold pt-3 pl-3 pb-1 mb-4 pointer d-flex">
-                                <h4 class="text-white">TO-DO</h4><i
-                                    class="fas fa-caret-down text-white ml-auto mr-4 mt-1 fa-lg rotate"></i>
+                        <ul class="w-100 mt-5 pl-0 pr-6 ">
+                            <li class="titleBg font-weight-bold pt-3 pl-3 pb-1 mb-4 pointer d-flex">
+                                <h4 class="text-white">CHART</h4>
                             </li>
-
-                            <ul class="w-100 pl-0 pr-2 todoShow" style="display: none">
-                                <li class="text-white bg-assist font-weight-bold d-flex mb-3 todoshowStyle"
-                                    v-for='(item,index) in uncompleted'>
-
-                                    <span class="rounded-circle willtodo-circle-detail mr-3 mb-2 pointer"
-                                        @click="item.finish = !item.finish"></span>
-
-                                    <span>{{item.title}}</span>
-
-                                    <span class="text-center ml-auto pointer" @click="todoChange(item)">
-                                        <i class="far fa-play-circle"></i></span>
-
-                                </li>
-                            </ul>
-
                         </ul>
+                        <canvas id="pomodoroChart" style="width: 400px;height:150px;"></canvas>
+                    </div>
 
-                        <ul class="w-100 mt-5 pl-0 pr-6 removeulDisplay">
-                            <li class="todoStorage-done font-weight-bold pt-3 pl-3 pb-1 mb-4 pointer d-flex">
-                                <h4 class="text-white">DONE</h4><i
-                                    class="fas fa-caret-down text-white ml-auto mr-4 mt-1 fa-lg rotate-done"></i>
-                            </li>
-
-                            <ul class="w-100 pl-0 pr-2 todoShow-done" style="display: none">
-                                <li class="text-white bg-assist font-weight-bold d-flex mb-3 todoshowStyle"
-                                    v-for='(item,index) in completed'>
-
-                                    <span
-                                        class="rounded-circle willtodo-circle-detail mr-3 mb-2 pointer fas fa-check-circle text-white fa-2x border-0"
-                                        @click="item.finish = !item.finish"></span>
-
-                                    <span class="completed">{{item.title}}</span>
-
-                                    <span class="text-center ml-auto pointer" @click="todoChange(item)">
-                                        <i class="far fa-play-circle"></i></span>
-
-                                </li>
-                            </ul>
-
-                        </ul>
+                    <div class="col-md-2 d-flex flex-column vh-100">
+                        <div>
+                            <h3 class="text-white font-weight-bold mt-11 rotate-90 ml-7">POMODORO</h3>
+                        </div>
 
                     </div>
 
+
                 </section>
 
-                <div class=" d-flex align-items-end justify-content-between">
+                <div class=" d-flex align-items-end justify-content-between" style="position: absolute;bottom:0;">
                     <div class="semi-circle ml-5 d-flex flex-column justify-content-center align-items-center relative">
 
                         <div class="rounded-circle semiplayBorder">
@@ -410,22 +384,17 @@
 
                         <span class="display-4 font-weight-bold mt-6"
                             :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">{{minutes}}:{{seconds}}</span>
-                        <div class="h4">
+                        <div class="h4 pb-0 mb-0">
                             <span v-for='item in firstThing' :class="{'completed':item.finish}">{{item.title}}</span>
                         </div>
 
                     </div>
-
-                    <h3 class="text-white font-weight-bold rotate-90 pb-7 mr-5">POMODORO</h3>
                 </div>
-
-
-                <div class="text-white closePage pointer" @click="openList = false">
-                        <i class="fas fa-times fa-3x"></i>
-                    </div>
-            </div> -->
-
-            <!-- style="transform: translateX(2000px); position: absolute;top: 0;left: 0;bottom: 0; overflow: hidden;transition:ease-in-out 2s" -->
+                <div class="text-white pointer " @click="openAnalytics = false">
+                    <i class="fas fa-times fa-3x closePage" @click='indexOpen = true'></i>
+                </div>
+            </div>
+            <!-- ------ -->
         </div>
     </div>
 
@@ -435,6 +404,7 @@
     <script src="https://kit.fontawesome.com/7e3354ec65.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>

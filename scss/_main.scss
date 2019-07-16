@@ -125,18 +125,13 @@
 }
 
 
-toDolist 頁面製作
-.todolistShow{
-    transform: translateX(4000px) !important;
-    z-index: 9999;
-}
 
 //移除ul預設樣式
 .removeulDisplay{
     list-style-type: none;
 }
 
-//todolist 收起功能
+//todolist 收起功能(搭配jQuery)
 .todoStorage{
     background-color: hsla(0,0%,100%,.2);
 }
@@ -144,6 +139,7 @@ toDolist 頁面製作
 .todoStorage-done{
     background-color: hsla(0,0%,100%,.2);
 }
+
 //todolist 收合展開效果
 .todoshowStyle{
     border-bottom: rgba(255,255,255,0.7) 1px solid ;
@@ -186,3 +182,7 @@ toDolist 頁面製作
     }
 }
 
+//功能頁面小標題背景
+.titleBg{
+    background-color: hsla(0,0%,100%,.2);
+}

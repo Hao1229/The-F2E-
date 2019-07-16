@@ -15,6 +15,7 @@ var app = new Vue({
         openList: false,
         unfold: false,
         indexOpen: true,
+        openAnalytics: false,
     },
     methods: {
         controlTimer: function () {
@@ -273,16 +274,20 @@ $(document).ready(function () {
     $('.todoStorage').click(function (e) { 
         e.preventDefault();
         $('.todoShow').slideToggle(600);
+        $('.todoShow-done').slideUp(600);
         $('.rotate').delay(600).toggleClass('fa-caret-up');
         $('.rotate').delay(600).toggleClass('fa-caret-down');
-        
+        $('.rotate-done').delay(600).addClass('fa-caret-down');
+        $('.rotate-done').delay(600).removeClass('fa-caret-up');
     });
     $('.todoStorage-done').click(function (e) { 
         e.preventDefault();
         $('.todoShow-done').slideToggle(600);
+        $('.todoShow').slideUp(600);
         $('.rotate-done').delay(600).toggleClass('fa-caret-up');
         $('.rotate-done').delay(600).toggleClass('fa-caret-down');
-        
+        $('.rotate').delay(600).addClass('fa-caret-down');
+        $('.rotate').delay(600).removeClass('fa-caret-up');
     });
     //關閉頁面叉叉動畫
     $('.closePage').hover(function () {
@@ -291,3 +296,63 @@ $(document).ready(function () {
     );
 });
 
+//chart.js 長條圖製作
+
+let ctx = document.getElementById('pomodoroChart');
+let pomodoroChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['7/1', '7/2', '7/3','7/4','7/5','7/6','7/7'],
+      datasets: [{
+        label:'',
+        backgroundColor: [
+          'rgba(255, 255, 255, 1)',
+          'rgba(255, 255, 255, 1)',
+          'rgba(255, 255, 255, 1)',
+          'rgba(255, 255, 255, 1)',
+          'rgba(255, 255, 255, 1)',
+          'rgba(255, 255, 255, 1)',
+          'rgba(255, 67, 132, 1)'
+        ],
+        data: [16, 12, 16, 8, 12, 4, 20],
+      }]
+    },
+    options: {
+        responsive: true,
+        legend: { //是否要顯示圖示
+            display: false,
+        },
+        tooltips: { //是否要顯示 tooltip
+            enabled: true
+        },
+        scales: {  //是否要顯示 x、y 軸
+            xAxes: [{
+                display: true,
+                barPercentage:0.5,
+                gridLines: {
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    color: 'rgba(255, 255, 255, 1)'
+                },
+                ticks:{
+                    fontColor: '#FFFFFF'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                barPercentage:0.5,
+                gridLines: {
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    color: 'rgba(255, 255, 255, 1)'
+                },
+                ticks: {
+                    suggestedMin: 2,
+                    suggestedMax: 24,
+                    fontColor: '#FFFFFF',
+                    padding: 5
+                }
+            }]
+        },
+    }
+  });
