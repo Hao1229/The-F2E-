@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html body {
   font-family: roboto !important;
 }
@@ -42,6 +43,14 @@ html body {
   margin-top: 28rem;
 }
 
+.mb-6 {
+  margin-bottom: 5rem;
+}
+
+.mb-7 {
+  margin-bottom: 10rem;
+}
+
 .pr-6 {
   padding-right: 5rem;
 }
@@ -64,6 +73,14 @@ html body {
 
 .pb-8 {
   padding-bottom: 15rem;
+}
+
+.pt-6 {
+  padding-top: 5rem;
+}
+
+.pt-7 {
+  padding-top: 10rem;
 }
 
 .relative {
@@ -272,6 +289,13 @@ html body {
   text-decoration: line-through;
 }
 
+toDolist 頁面製作
+.todolistShow {
+  -webkit-transform: translateX(4000px) !important;
+          transform: translateX(4000px) !important;
+  z-index: 9999;
+}
+
 .removeulDisplay {
   list-style-type: none;
 }
@@ -280,7 +304,40 @@ html body {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+.todoStorage-done {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .todoshowStyle {
   border-bottom: rgba(255, 255, 255, 0.7) 1px solid;
+}
+
+.semi-circle {
+  width: 350px;
+  border-radius: 350px 350px 0 0;
+  height: 175px;
+  background-color: #FFEDF7;
+}
+
+.semiPlay {
+  width: 6rem;
+  height: 6rem;
+}
+
+.semiplayBorder {
+  border: 6px solid #003164;
+  position: absolute;
+  top: -3rem;
+  left: 7rem;
+}
+
+.closePage {
+  position: absolute;
+  top: 3rem;
+  right: 5rem;
+}
+
+.optionbgChange:hover {
+  color: #FF4384;
 }
 /*# sourceMappingURL=all.css.map */

@@ -14,9 +14,140 @@
 </head>
 
 <body>
-    <div class="container-fluid relative">
+    <div class="container-fluid">
         <div class="row relative" id="app">
-            <section class="col-md-8 bg-main pb-6" :class="{'bg-breakBlue':isBreak}">
+
+            <!-- todolist頁面 -->
+            <div :class="{'todolistShow': openList}" class="bg-assist col-12 vh-100 relative animated bounceInRight" v-show="openList" >
+                <section class="row">
+
+                    <ul class="removeulDisplay text-default col-md-4 ml-5">
+
+                        <li class="font-weight-bold h3 text-third">
+                            <i class="fas fa-list-ul fa-sm mt-5 mr-3"></i><span>TO-DO
+                                LIST</span></li>
+
+                        <li class="font-weight-bold h3 optionbgChange">
+                            <i class="fas fa-chart-bar fa-sm mt-5 mr-3 pointer"></i><span
+                                class="pointer">ANALYTICS</span></li>
+
+                        <li class="font-weight-bold h3 optionbgChange">
+                            <i class="fas fa-music fa-sm mt-5 mr-3 pointer"></i><span class="pointer">RINGTONES</span>
+                        </li>
+                    </ul>
+
+
+                    <div class="d-flex flex-column col-md-5 h-100 mt-5">
+
+                        <div class="input-group">
+
+                            <input type="text" placeholder="add a new mission…" class="p-3 w-75 border-0"
+                                v-model='newTodo' @keyup.enter='addTodo' :class="{'breakPlaceholder':isBreak}">
+
+                            <div class="input-group-prepend ">
+                                <span class="text-center input-group-text text-third bg-white border-0 pointer plus"
+                                    @click="addTodo" :class="{'text-breakDeepblue':isBreak}"><i
+                                        class="fas fa-plus fa-lg"></i></span>
+                            </div>
+
+                        </div>
+
+
+                        <ul class="w-100 mt-5 pl-0 pr-6 removeulDisplay">
+                            <li class="todoStorage font-weight-bold pt-3 pl-3 pb-1 mb-4 pointer d-flex">
+                                <h4 class="text-white">TO-DO</h4><i
+                                    class="fas fa-caret-down text-white ml-auto mr-4 mt-1 fa-lg rotate"></i>
+                            </li>
+
+                            <ul class="w-100 pl-0 pr-2 todoShow" style="display: none">
+                                <li class="text-white bg-assist font-weight-bold d-flex mb-3 todoshowStyle"
+                                    v-for='(item,index) in uncompleted'>
+
+                                    <span class="rounded-circle willtodo-circle-detail mr-3 mb-2 pointer"
+                                        @click="item.finish = !item.finish"></span>
+
+                                    <span>{{item.title}}</span>
+
+                                    <span class="text-center ml-auto pointer" @click="todoChange(item)">
+                                        <i class="far fa-play-circle"></i></span>
+
+                                </li>
+                            </ul>
+
+                        </ul>
+
+                        <ul class="w-100 mt-5 pl-0 pr-6 removeulDisplay">
+                            <li class="todoStorage-done font-weight-bold pt-3 pl-3 pb-1 mb-4 pointer d-flex">
+                                <h4 class="text-white">DONE</h4><i
+                                    class="fas fa-caret-down text-white ml-auto mr-4 mt-1 fa-lg rotate-done"></i>
+                            </li>
+
+                            <ul class="w-100 pl-0 pr-2 todoShow-done" style="display: none">
+                                <li class="text-white bg-assist font-weight-bold d-flex mb-3 todoshowStyle"
+                                    v-for='(item,index) in completed'>
+
+                                    <span
+                                        class="rounded-circle willtodo-circle-detail mr-3 mb-2 pointer fas fa-check-circle text-white fa-2x border-0"
+                                        @click="item.finish = !item.finish"></span>
+
+                                    <span class="completed">{{item.title}}</span>
+
+                                    <span class="text-center ml-auto pointer" @click="todoChange(item)">
+                                        <i class="far fa-play-circle"></i></span>
+
+                                </li>
+                            </ul>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-2 d-flex flex-column vh-100">
+                        <div>
+                            <h3 class="text-white font-weight-bold mt-11 rotate-90 ml-7">POMODORO</h3>
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+                <div class=" d-flex align-items-end justify-content-between" style="position: absolute;bottom:0;">
+                    <div class="semi-circle ml-5 d-flex flex-column justify-content-center align-items-center relative">
+
+                        <div class="rounded-circle semiplayBorder">
+                            <div class="rounded-circle p-2 bg-assist" style="border:2px solid #FF4384;">
+                                <div class="rounded-circle d-flex justify-content-center align-items-center pointer semiPlay"
+                                    :class="{'bg-third': !start,'bg-white': start,'bg-breakDeepblue': isBreak}">
+
+                                    <span class="ml-2" @click="controlTimer"
+                                        :class="{'text-white': !start,'text-third': start,'text-breakDeepblue':isBreak}">
+                                        <i class="fa-3x"
+                                            :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <span class="display-4 font-weight-bold mt-6"
+                            :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">{{minutes}}:{{seconds}}</span>
+                        <div class="h4 pb-0 mb-0">
+                            <span v-for='item in firstThing' :class="{'completed':item.finish}">{{item.title}}</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text-white pointer " @click="openList = false">
+                        <i class="fas fa-times fa-3x closePage" @click = 'indexOpen = true'></i>
+                </div>
+            </div>
+
+
+            <!-- 主頁面 -->
+            <section class="col-md-8 bg-main pb-6 animated bounceInRight" :class="{'bg-breakBlue':isBreak}" v-show="indexOpen">
                 <div class="ml-5 mt-5 w-75">
                     <!-- 添加待辦input製作 -->
                     <div class="input-group">
@@ -120,13 +251,14 @@
 
                 </div>
             </section>
-            <section class="col-md-4 bg-assist">
+            <section class="col-md-4 bg-assist animated bounceInRight" v-show="indexOpen">
 
                 <!-- 切換按鈕 & 英文字 -->
                 <div class="d-flex flex-column align-items-end">
 
                     <div class="d-flex flex-column">
-                        <i class="fas fa-list-ul text-white fa-lg mt-5 mr-5 pointer" @click="openList = !openList"></i>
+                        <div class="mt-5 mr-5 pointer" @click="openList = true"><i class="fas fa-list-ul text-white fa-lg" @click="indexOpen = false"></i></div>
+
                         <i class="fas fa-chart-bar text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-music text-white fa-lg mt-5 mr-5 pointer"></i>
                         <i class="fas fa-trash-alt text-white fa-lg mt-5 mr-5 pointer" @click="deleteFinish"></i>
@@ -138,7 +270,8 @@
                 </div>
             </section>
             <!--中心圓圈製作 -->
-            <div style="position:absolute;top: 60px; right: 185px; width: 540px;height: 540px;" class="relative">
+            <div style="position:absolute;top: 60px; right: 185px; width: 540px;height: 540px;" class="relative animated bounceInRight"
+                v-show="indexOpen">
 
                 <svg style="transform:rotate(-90deg);width:540px;height:540px;" class="rounded-circle"
                     :class="{'outercircleBorder': !isBreak,'outercircleBorder-break': isBreak}">
@@ -156,8 +289,7 @@
 
                         <span class="ml-2" @click="controlTimer"
                             :class="{'text-third': !start,'text-white': start,'text-breakDeepblue':isBreak}">
-                            <i class="js-timer-play fa-3x"
-                                :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
+                            <i class="fa-3x" :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
                         </span>
 
                     </div>
@@ -169,13 +301,14 @@
 
             </div>
 
-            <!-- 頁面試作 -->
-            <div :class="{'todolistShow': openList}" class="bg-assist w-100 mt-3" style="height: 800px;">
+            <!-- toDolist頁面 -->
+            <!-- <div :class="{'todolistShow': openList}" class="bg-assist w-100 mt-3 relative">
                 <section class="row">
+
                     <ul class="removeulDisplay text-default col-md-4 ml-5">
 
-                        <li :class="{'text-third':openList}" class="font-weight-bold h3" @click="openList = !openList">
-                            <i class="fas fa-list-ul fa-sm mt-5 mr-3 pointer"></i><span class="pointer">TO-DO
+                        <li class="font-weight-bold h3 text-third">
+                            <i class="fas fa-list-ul fa-sm mt-5 mr-3"></i><span>TO-DO
                                 LIST</span></li>
 
                         <li class="font-weight-bold h3">
@@ -186,6 +319,7 @@
                             <i class="fas fa-music fa-sm mt-5 mr-3 pointer"></i><span class="pointer">RINGTONES</span>
                         </li>
                     </ul>
+
 
                     <div class="d-flex flex-column col-md-5 h-100 mt-5">
 
@@ -226,12 +360,71 @@
 
                         </ul>
 
+                        <ul class="w-100 mt-5 pl-0 pr-6 removeulDisplay">
+                            <li class="todoStorage-done font-weight-bold pt-3 pl-3 pb-1 mb-4 pointer d-flex">
+                                <h4 class="text-white">DONE</h4><i
+                                    class="fas fa-caret-down text-white ml-auto mr-4 mt-1 fa-lg rotate-done"></i>
+                            </li>
+
+                            <ul class="w-100 pl-0 pr-2 todoShow-done" style="display: none">
+                                <li class="text-white bg-assist font-weight-bold d-flex mb-3 todoshowStyle"
+                                    v-for='(item,index) in completed'>
+
+                                    <span
+                                        class="rounded-circle willtodo-circle-detail mr-3 mb-2 pointer fas fa-check-circle text-white fa-2x border-0"
+                                        @click="item.finish = !item.finish"></span>
+
+                                    <span class="completed">{{item.title}}</span>
+
+                                    <span class="text-center ml-auto pointer" @click="todoChange(item)">
+                                        <i class="far fa-play-circle"></i></span>
+
+                                </li>
+                            </ul>
+
+                        </ul>
+
                     </div>
+
                 </section>
 
+                <div class=" d-flex align-items-end justify-content-between">
+                    <div class="semi-circle ml-5 d-flex flex-column justify-content-center align-items-center relative">
+
+                        <div class="rounded-circle semiplayBorder">
+                            <div class="rounded-circle p-2 bg-assist" style="border:2px solid #FF4384;">
+                                <div class="rounded-circle d-flex justify-content-center align-items-center pointer semiPlay"
+                                    :class="{'bg-third': !start,'bg-white': start,'bg-breakDeepblue': isBreak}">
+
+                                    <span class="ml-2" @click="controlTimer"
+                                        :class="{'text-white': !start,'text-third': start,'text-breakDeepblue':isBreak}">
+                                        <i class="fa-3x"
+                                            :class='{"fas fa-play" : !start, "fas fa-pause mr-2" : start}'></i>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                        </div>
 
 
-            </div>
+                        <span class="display-4 font-weight-bold mt-6"
+                            :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}">{{minutes}}:{{seconds}}</span>
+                        <div class="h4">
+                            <span v-for='item in firstThing' :class="{'completed':item.finish}">{{item.title}}</span>
+                        </div>
+
+                    </div>
+
+                    <h3 class="text-white font-weight-bold rotate-90 pb-7 mr-5">POMODORO</h3>
+                </div>
+
+
+                <div class="text-white closePage pointer" @click="openList = false">
+                        <i class="fas fa-times fa-3x"></i>
+                    </div>
+            </div> -->
+
             <!-- style="transform: translateX(2000px); position: absolute;top: 0;left: 0;bottom: 0; overflow: hidden;transition:ease-in-out 2s" -->
         </div>
     </div>

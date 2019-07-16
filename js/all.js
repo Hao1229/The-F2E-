@@ -14,6 +14,7 @@ var app = new Vue({
         isBreak: false,
         openList: false,
         unfold: false,
+        indexOpen: true,
     },
     methods: {
         controlTimer: function () {
@@ -204,7 +205,7 @@ var app = new Vue({
         strokeDashoffset:function(r,el){
             return (this.strokeDasharray(r) * el );
         },
-       
+    
     },
     computed:{
         firstThing:function(){
@@ -236,7 +237,13 @@ var app = new Vue({
             return vm.toDos.filter(function(item){
                 return item.finish === false;
             })
-        }
+        },
+        completed:function(){
+            let vm = this;
+            return vm.toDos.filter(function(item){
+                return item.finish === true;
+            })
+        },
     },
     watch:{
         toDos:{
@@ -265,11 +272,22 @@ $(document).ready(function () {
     //收合todolist效果
     $('.todoStorage').click(function (e) { 
         e.preventDefault();
-        $('.todoShow').slideToggle(1000);
-        $('.rotate').delay(1000).toggleClass('fa-caret-up');
-        $('.rotate').delay(1000).toggleClass('fa-caret-down');
+        $('.todoShow').slideToggle(600);
+        $('.rotate').delay(600).toggleClass('fa-caret-up');
+        $('.rotate').delay(600).toggleClass('fa-caret-down');
         
     });
-
+    $('.todoStorage-done').click(function (e) { 
+        e.preventDefault();
+        $('.todoShow-done').slideToggle(600);
+        $('.rotate-done').delay(600).toggleClass('fa-caret-up');
+        $('.rotate-done').delay(600).toggleClass('fa-caret-down');
+        
+    });
+    //關閉頁面叉叉動畫
+    $('.closePage').hover(function () {
+          $(this).toggleClass('animated heartBeat');
+        }
+    );
 });
 

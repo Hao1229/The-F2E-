@@ -125,11 +125,11 @@
 }
 
 
-//toDolist 頁面製作
-// .todolistShow{
-//     transform: translateX(0px) !important;
-//     z-index: 9999;
-// }
+toDolist 頁面製作
+.todolistShow{
+    transform: translateX(4000px) !important;
+    z-index: 9999;
+}
 
 //移除ul預設樣式
 .removeulDisplay{
@@ -141,9 +141,48 @@
     background-color: hsla(0,0%,100%,.2);
 }
 
+.todoStorage-done{
+    background-color: hsla(0,0%,100%,.2);
+}
 //todolist 收合展開效果
 .todoshowStyle{
     border-bottom: rgba(255,255,255,0.7) 1px solid ;
 }
 
+
+//半圓小計時器
+.semi-circle{
+    width: 350px;
+    border-radius: 350px 350px 0 0;
+    height: 175px;
+    background-color: $mainColor;
+}
+
+//半圓播放器設定
+.semiPlay{
+    width: 6rem;
+    height: 6rem;
+}
+
+//半圓播放器邊框
+.semiplayBorder{
+    border:6px solid #003164; 
+    position: absolute;
+    top: -3rem; 
+    left: 7rem;
+}
+
+//關閉頁面按鈕設計
+.closePage{
+    position: absolute;
+    top: 3rem;
+    right: 5rem;
+}
+
+//左側選項hover效果
+.optionbgChange{
+    &:hover{
+        color: $thirdColor;
+    }
+}
 
