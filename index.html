@@ -18,7 +18,7 @@
         <div class="row relative" id="app">
             <!-- 主頁面 -->
             <section class="col-md-8 bg-main pb-6 animated bounceInRight" :class="{'bg-breakBlue':isBreak}"
-                v-show="indexOpen" style="height:800px;">
+                v-show="indexOpen">
                 <div class="ml-5 mt-5 w-75">
                     <!-- 添加待辦input製作 -->
                     <div class="input-group">
@@ -113,16 +113,18 @@
 
                     </ul>
 
-                    <div class="d-flex flex-row-reverse w-75 pointer" v-if="toDos.length > 4" @click="indexOpen = false">
+                    <div class="d-flex flex-row-reverse w-75 pointer" v-if="toDos.length > 4"
+                        @click="indexOpen = false">
 
                         <span class="font-weight-bold p-1 more-hover"
-                            :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}" @click="openList = true">MORE</span>
+                            :class="{'text-third':!isBreak,'text-breakDeepblue':isBreak}"
+                            @click="openList = true">MORE</span>
 
                     </div>
 
                 </div>
             </section>
-            <section class="col-md-4 bg-assist animated bounceInRight " v-show="indexOpen" style="height:800px;">
+            <section class="col-md-4 bg-assist animated bounceInRight " v-show="indexOpen">
 
                 <!-- 切換按鈕 & 英文字 -->
                 <div class="d-flex flex-column align-items-end">
@@ -140,10 +142,12 @@
                         <i class="fas fa-mug-hot fa-lg mt-5 mr-5 pointer text-white" @click="goBreak"></i>
                         <i class="fas fa-tools fa-lg mt-5 mr-5 pointer text-white" @click="goWork"></i>
                     </div>
-
-                    <h3 class="text-white font-weight-bold mt-8 rotate-90 pb-5">POMODORO</h3>
                 </div>
             </section>
+            <!-- 標題定位 -->
+            <h3 class="text-white font-weight-bold rotate-90" v-show="indexOpen"
+                style="position: absolute; bottom:55px; right: 1px;">POMODORO</h3>
+
             <!--中心圓圈製作 -->
             <div style="position:absolute;top: 60px; right: 185px; width: 540px;height: 540px;"
                 class="relative animated bounceInRight" v-show="indexOpen">
@@ -191,7 +195,8 @@
                                 class="pointer" @click="openList = false">ANALYTICS</span></li>
 
                         <li class="font-weight-bold h3 optionbgChange" @click="openMusic = true">
-                            <i class="fas fa-music fa-sm mt-5 mr-3 pointer" @click="openList = false"></i><span class="pointer" @click="openList = false">RINGTONES</span>
+                            <i class="fas fa-music fa-sm mt-5 mr-3 pointer" @click="openList = false"></i><span
+                                class="pointer" @click="openList = false">RINGTONES</span>
                         </li>
                     </ul>
 
@@ -320,7 +325,8 @@
                             <i class="fas fa-chart-bar fa-sm mt-5 mr-3"></i><span>ANALYTICS</span></li>
 
                         <li class="font-weight-bold h3 optionbgChange" @click="openMusic = true">
-                            <i class="fas fa-music fa-sm mt-5 mr-3 pointer" @click="openAnalytics = false"></i><span class="pointer" @click="openAnalytics = false">RINGTONES</span>
+                            <i class="fas fa-music fa-sm mt-5 mr-3 pointer" @click="openAnalytics = false"></i><span
+                                class="pointer" @click="openAnalytics = false">RINGTONES</span>
                         </li>
                     </ul>
 
@@ -536,7 +542,8 @@
                         <div class="text-white pr-6 d-flex justify-content-between">
                             <div class="d-flex flex-column">
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
-                                    <input type="radio" id="NONE" name="customRadioInline" class="custom-control-input pointer">
+                                    <input type="radio" id="NONE" name="customRadioInline"
+                                        class="custom-control-input pointer">
                                     <label class="custom-control-label pointer" for="NONE">NONE</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
@@ -545,15 +552,18 @@
                                     <label class="custom-control-label pointer" for="ALERT">ALERT</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
-                                    <input type="radio" id="BIRD" name="customRadioInline" class="custom-control-input pointer">
+                                    <input type="radio" id="BIRD" name="customRadioInline"
+                                        class="custom-control-input pointer">
                                     <label class="custom-control-label pointer" for="BIRD">BIRD</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
-                                    <input type="radio" id="DROP" name="customRadioInline" class="custom-control-input pointer">
+                                    <input type="radio" id="DROP" name="customRadioInline"
+                                        class="custom-control-input pointer">
                                     <label class="custom-control-label pointer" for="DROP">DROP</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
-                                    <input type="radio" id="RING" name="customRadioInline" class="custom-control-input pointer">
+                                    <input type="radio" id="RING" name="customRadioInline"
+                                        class="custom-control-input pointer">
                                     <label class="custom-control-label pointer" for="RING">RING</label>
                                 </div>
                             </div>
@@ -566,7 +576,8 @@
                                 </div>
 
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
-                                    <input type="radio" id="BEEP" name="customRadioInline" class="custom-control-input pointer">
+                                    <input type="radio" id="BEEP" name="customRadioInline"
+                                        class="custom-control-input pointer">
                                     <label class="custom-control-label pointer" for="BEEP">BEEP </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
@@ -575,7 +586,8 @@
                                     <label class="custom-control-label pointer" for="BUGLE">BUGLE</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
-                                    <input type="radio" id="HORN" name="customRadioInline" class="custom-control-input pointer">
+                                    <input type="radio" id="HORN" name="customRadioInline"
+                                        class="custom-control-input pointer">
                                     <label class="custom-control-label pointer" for="HORN">HORN</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3 pointer">
@@ -593,7 +605,8 @@
                                     <label class="custom-control-label pointer" for="ALARM">ALARM</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline mb-3">
-                                    <input type="radio" id="BELL" name="customRadioInline" class="custom-control-input pointer">
+                                    <input type="radio" id="BELL" name="customRadioInline"
+                                        class="custom-control-input pointer">
                                     <label class="custom-control-label pointer" for="BELL">BELL</label>
                                 </div>
 
