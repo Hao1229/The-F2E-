@@ -16,6 +16,7 @@ var app = new Vue({
         unfold: false,
         indexOpen: true,
         openAnalytics: false,
+        openMusic: false,
     },
     methods: {
         controlTimer: function () {

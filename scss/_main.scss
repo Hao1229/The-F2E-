@@ -186,3 +186,26 @@
 .titleBg{
     background-color: hsla(0,0%,100%,.2);
 }
+
+//checkbox樣式修改
+
+.custom-control-input:checked~.custom-control-label:before {
+    border-color: $thirdColor !important;
+    background-color: transparent !important;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label:after {
+    background-image: none;
+    background-color: #ff4384;
+    border-radius: 50%;
+    width: 0.625rem;
+    height: 0.625rem;
+    top: 0.4375rem;
+    left: -1.3rem;
+}
+
+.custom-control-label:before{
+    border: white 2px solid;
+    background-color: transparent;
+}
+
